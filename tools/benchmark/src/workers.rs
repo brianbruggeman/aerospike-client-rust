@@ -51,7 +51,7 @@ impl FromStr for Workload {
         match parts.next() {
             Some("RU") => {
                 let read_pct = Percent::from_str(parts.next().unwrap_or("100"))?;
-                Ok(Workload::ReadUpdate { read_pct: read_pct })
+                Ok(Workload::ReadUpdate { read_pct })
             }
             Some("I") => Ok(Workload::Initialize),
             _ => Err(String::from("Invalid workload definition")),
@@ -78,7 +78,7 @@ impl Worker {
         Worker {
             histogram: Histogram::new(),
             collector: sender,
-            task: task,
+            task,
         }
     }
 
@@ -128,7 +128,7 @@ pub struct InsertTask {
 impl InsertTask {
     pub fn new(client: Arc<Client>) -> Self {
         InsertTask {
-            client: client,
+            client,
             policy: WritePolicy::default(),
         }
     }
@@ -152,10 +152,10 @@ pub struct ReadUpdateTask {
 impl ReadUpdateTask {
     pub fn new(client: Arc<Client>, reads: Percent) -> Self {
         ReadUpdateTask {
-            client: client,
+            client,
             rpolicy: ReadPolicy::default(),
             wpolicy: WritePolicy::default(),
-            reads: reads,
+            reads,
         }
     }
 }

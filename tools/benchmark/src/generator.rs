@@ -34,8 +34,8 @@ impl KeyPartitions {
         partitions: i64,
     ) -> Self {
         KeyPartitions {
-            namespace: namespace,
-            set: set,
+            namespace,
+            set,
             index: start_key,
             end: start_key + count,
             keys_per_partition: count / partitions,
@@ -74,8 +74,8 @@ pub struct KeyRange {
 impl KeyRange {
     pub fn new(namespace: String, set: String, start: i64, count: i64) -> Self {
         KeyRange {
-            namespace: namespace,
-            set: set,
+            namespace,
+            set,
             index: start,
             end: start + count,
         }

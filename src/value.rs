@@ -735,7 +735,7 @@ impl Serialize for Value {
                 FloatValue::F64(u) => serializer.serialize_u64(*u),
             },
             Value::String(s) | Value::GeoJSON(s) => serializer.serialize_str(s),
-            Value::Blob(b) => serializer.serialize_bytes(&b[..]),
+            Value::Blob(b) | Value::HLL(b) => serializer.serialize_bytes(&b[..]),
             Value::List(l) => {
                 let mut seq = serializer.serialize_seq(Some(l.len()))?;
                 for elem in l {
@@ -757,7 +757,6 @@ impl Serialize for Value {
                 }
                 map.end()
             }
-            Value::HLL(b) => serializer.serialize_bytes(&b[..]),
         }
     }
 }

@@ -51,8 +51,10 @@ fn main() {
 }
 
 fn connect(options: &Options) -> Client {
-    let mut policy = ClientPolicy::default();
-    policy.conn_pools_per_node = options.conn_pools_per_node;
+    let policy = ClientPolicy {
+        conn_pools_per_node: options.conn_pools_per_node,
+        ..Default::default()
+    };
     Client::new(&policy, &options.hosts).unwrap()
 }
 

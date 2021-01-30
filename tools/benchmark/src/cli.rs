@@ -22,7 +22,7 @@ use num_cpus;
 
 use workers::Workload;
 
-const AFTER_HELP: &'static str = r###"
+const AFTER_HELP: &str = r###"
 
 SETTING SEED HOSTS:
 
@@ -134,6 +134,6 @@ fn build_cli() -> App<'static, 'static> {
 fn validate<T: FromStr>(value: String, err: String) -> Result<(), String> {
     match T::from_str(value.as_ref()) {
         Ok(_) => Ok(()),
-        Err(_) => Err(err.into()),
+        Err(_) => Err(err),
     }
 }
