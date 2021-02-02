@@ -34,6 +34,7 @@ style: | $(CARGO) rustfmt ## Run style check
 
 test: $(CARGO)  ## Run tests
 	$(CARGO) test --release
+	$(CARGO) test --release --features serialization
 
 # ======================================================================
 # 
